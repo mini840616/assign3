@@ -30,7 +30,7 @@ PImage bomb, flag, cross, bg;
 
 void setup() {
   size (640, 480);
-  textFont( createFont("font/Square_One.ttf", 24), 24);
+  textFont(loadFont("font/Square_One.ttf"),24);
   bomb=loadImage("data/bomb.png");
   flag=loadImage("data/flag.png");
   cross=loadImage("data/cross.png");
@@ -53,6 +53,7 @@ void draw() {
   case GAME_START:
     background(180);
     image(bg, 0, 0, 640, 480);
+    textFont(loadFont("font/Square_One.ttf"),24);
     textSize(16);
     fill(0);
     text("Choose # of bombs to continue:", 10, width/3-24);
@@ -78,12 +79,14 @@ void draw() {
     // -----------------------------------
     break;
   case GAME_WIN:
-    textSize(18);
+    textFont(loadFont("font/Square_One.ttf"),24);
+    //textSize(24);
     fill(0);
     text("YOU WIN !!", width/3, 30);
     break;
   case GAME_LOSE:
-    textSize(18);
+    textFont(loadFont("font/Square_One.ttf"),24);
+    //textSize(24);
     fill(0);
     text("YOU LOSE !!", width/3, 30);
     break;
@@ -140,7 +143,7 @@ void setBombs() {
 void openAllSlots() {
   for (int col=0; col < nSlot; col++) {
     for (int row=0; row < nSlot; row++) {
-
+              
       switch (slot[col][row]) {
 
       case SLOT_OFF:
@@ -150,15 +153,16 @@ void openAllSlots() {
 
       case SLOT_BOMB:
 
-        //do nothing
+       //do nothing
         break;
 
       case SLOT_SAFE:
 
-        //do nothing
+       //do nothing
         break;
 
       case SLOT_FLAG:
+
         //do nothing
         break;
 
@@ -167,14 +171,13 @@ void openAllSlots() {
         int y = iy + row*SLOT_SIZE;
         fill(255);
         rect(x, y, SLOT_SIZE, SLOT_SIZE);
-
         break;
 
       case SLOT_DEAD:
         //impossible case when gameState = GAME_RUN
         break;
       }
-      showSlot(col, row, slot[col][row]);
+      showSlot(col, row,slot[col][row]);
     }
   }
 }
@@ -254,7 +257,7 @@ void mousePressed() {
 
     // --------------- put you code here -------     
 
-
+    
     // int col = int((mouseX-ix)/SLOT_SIZE)
     // int row = int((mouseY-iy)/SLOT_SIZE)
     int col = (int)map(mouseX, ix, ix+sideLength, 0, nSlot);
